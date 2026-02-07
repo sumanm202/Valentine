@@ -1,35 +1,32 @@
-const questionContainer = document.querySelector(".question-container");
 const buttonContainer = document.querySelector(".button-container");
+const noBtn = document.querySelector(".js-no-btn");
+const yesBtn = document.querySelector(".js-yes-btn");
+const questionContainer = document.querySelector(".question-container");
 const resultContainer = document.querySelector(".result-container");
 const gifResult = document.querySelector(".gif-result");
 const heartLoader = document.querySelector(".cssload-main");
-const yesBtn = document.querySelector(".js-yes-btn");
-const noBtn = document.querySelector(".js-no-btn");
 
-let isFirstMove = true;
+let firstHover = true;
 
 function moveNoButton() {
-  const containerRect = buttonContainer.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
-
+  const container = buttonContainer.getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
   const padding = 10;
 
-  const maxX = containerRect.width - btnRect.width - padding;
-  const maxY = containerRect.height - btnRect.height - padding;
+  const maxX = container.width - btn.width - padding;
+  const maxY = container.height - btn.height - padding;
 
-  if (maxX <= 0 || maxY <= 0) return;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-  const newX = Math.random() * maxX;
-  const newY = Math.random() * maxY;
-
-  noBtn.style.left = `${newX}px`;
-  noBtn.style.top = `${newY}px`;
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 }
 
-/* ✅ Prevent instant invisible jump on page load */
+/* PC */
 noBtn.addEventListener("pointerenter", () => {
-  if (isFirstMove) {
-    isFirstMove = false;
+  if (firstHover) {
+    firstHover = false;
     return;
   }
   moveNoButton();
@@ -41,7 +38,7 @@ noBtn.addEventListener("pointerdown", (e) => {
   moveNoButton();
 });
 
-/* YES button */
+/* Yes click */
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "block";
