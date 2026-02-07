@@ -1,35 +1,44 @@
+const buttonContainer = document.querySelector(".button-container");
+const noBtn = document.querySelector(".js-no-btn");
+const yesBtn = document.querySelector(".js-yes-btn");
 const questionContainer = document.querySelector(".question-container");
 const resultContainer = document.querySelector(".result-container");
 const gifResult = document.querySelector(".gif-result");
 const heartLoader = document.querySelector(".cssload-main");
-const yesBtn = document.querySelector(".js-yes-btn");
-const noBtn = document.querySelector(".js-no-btn");
 
-// move NO button anywhere inside container (unlimited)
+let firstHover = true;
+
 function moveNoButton() {
-  const containerRect = questionContainer.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
+  const container = buttonContainer.getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
+  const padding = 10;
 
-  const maxX = containerRect.width - btnRect.width;
-  const maxY = containerRect.height - btnRect.height;
+  const maxX = container.width - btn.width - padding;
+  const maxY = container.height - btn.height - padding;
 
-  const newX = Math.random() * maxX;
-  const newY = Math.random() * maxY;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-  noBtn.style.left = `${newX}px`;
-  noBtn.style.top = `${newY}px`;
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 }
 
-// Desktop hover
-noBtn.addEventListener("mouseenter", moveNoButton);
+/* PC */
+noBtn.addEventListener("pointerenter", () => {
+  if (firstHover) {
+    firstHover = false;
+    return;
+  }
+  moveNoButton();
+});
 
-// Mobile touch (IMPORTANT)
-noBtn.addEventListener("touchstart", (e) => {
+/* Mobile */
+noBtn.addEventListener("pointerdown", (e) => {
   e.preventDefault();
   moveNoButton();
 });
 
-// YES button click
+/* Yes click */
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "block";
