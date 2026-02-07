@@ -1,17 +1,23 @@
 const questionContainer = document.querySelector(".question-container");
+const buttonContainer = document.querySelector(".button-container");
 const resultContainer = document.querySelector(".result-container");
 const gifResult = document.querySelector(".gif-result");
 const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
-// Move NO button randomly (unlimited, inside container)
+let isFirstMove = true;
+
 function moveNoButton() {
-  const containerRect = questionContainer.getBoundingClientRect();
+  const containerRect = buttonContainer.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
 
-  const maxX = containerRect.width - btnRect.width;
-  const maxY = containerRect.height - btnRect.height;
+  const padding = 10;
+
+  const maxX = containerRect.width - btnRect.width - padding;
+  const maxY = containerRect.height - btnRect.height - padding;
+
+  if (maxX <= 0 || maxY <= 0) return;
 
   const newX = Math.random() * maxX;
   const newY = Math.random() * maxY;
@@ -20,14 +26,22 @@ function moveNoButton() {
   noBtn.style.top = `${newY}px`;
 }
 
-/* 🔥 POINTER EVENTS → WORKS ON PC + MOBILE */
-noBtn.addEventListener("pointerenter", moveNoButton);
+/* ✅ Prevent instant invisible jump on page load */
+noBtn.addEventListener("pointerenter", () => {
+  if (isFirstMove) {
+    isFirstMove = false;
+    return;
+  }
+  moveNoButton();
+});
+
+/* Mobile */
 noBtn.addEventListener("pointerdown", (e) => {
   e.preventDefault();
   moveNoButton();
 });
 
-// YES button click
+/* YES button */
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "block";
