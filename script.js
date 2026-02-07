@@ -5,7 +5,7 @@ const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
-// move NO button anywhere inside container (unlimited)
+// Move NO button randomly (unlimited, inside container)
 function moveNoButton() {
   const containerRect = questionContainer.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
@@ -20,11 +20,9 @@ function moveNoButton() {
   noBtn.style.top = `${newY}px`;
 }
 
-// Desktop hover
-noBtn.addEventListener("mouseenter", moveNoButton);
-
-// Mobile touch (IMPORTANT)
-noBtn.addEventListener("touchstart", (e) => {
+/* 🔥 POINTER EVENTS → WORKS ON PC + MOBILE */
+noBtn.addEventListener("pointerenter", moveNoButton);
+noBtn.addEventListener("pointerdown", (e) => {
   e.preventDefault();
   moveNoButton();
 });
