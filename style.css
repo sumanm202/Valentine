@@ -76,10 +76,12 @@ body {
 }
 
 .no-btn {
+  position: fixed;   /* required for full screen */
   left: 55%;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 60%;
+  transform: none;   /* VERY IMPORTANT */
 }
+
 
 /* result */
 .result-container {
@@ -112,3 +114,4 @@ body {
     padding: 12px 22px;
   }
 }
+
