@@ -9,19 +9,20 @@ const heartLoader = document.querySelector(".cssload-main");
 let firstHover = true;
 
 function moveNoButton() {
-  const container = buttonContainer.getBoundingClientRect();
-  const btn = noBtn.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
   const padding = 10;
 
-  const maxX = container.width - btn.width - padding;
-  const maxY = container.height - btn.height - padding;
+  const maxX = window.innerWidth - btnRect.width - padding;
+  const maxY = window.innerHeight - btnRect.height - padding;
 
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
+  noBtn.style.position = "fixed"; // IMPORTANT
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
 }
+
 
 /* PC */
 noBtn.addEventListener("pointerenter", () => {
@@ -49,3 +50,4 @@ yesBtn.addEventListener("click", () => {
     gifResult.play();
   }, 3000);
 });
+
