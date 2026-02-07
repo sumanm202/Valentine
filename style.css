@@ -27,7 +27,7 @@ body {
   max-width: 420px;
 }
 
-/* IMAGE */
+/* VIDEO */
 .local-gif {
   width: 100%;
   max-width: 300px;
@@ -58,17 +58,16 @@ body {
   user-select: none;
 }
 
-/* YES BUTTON (STATIC) */
+/* YES BUTTON */
 .yes-btn {
   position: relative;
 }
 
-/* NO BUTTON (FULL SCREEN MOVE) */
+/* NO BUTTON → FULL SCREEN MOVEMENT */
 .no-btn {
-  position: fixed;       /* IMPORTANT */
+  position: fixed;
   left: 55%;
   top: 60%;
-  transform: none;       /* NO TRANSFORM */
   z-index: 1000;
 }
 
